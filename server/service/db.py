@@ -1,6 +1,4 @@
-url = 'storage/logs.txt'
-
-def read_logs():
+def read_logs(url = 'storage/logs.txt'):
     output = []
     
     try:
@@ -17,13 +15,12 @@ def read_logs():
     
     return "\n".join(output)
 
-def write_logs(data):
+def write_logs(data, url = 'storage/logs.txt'):
     try:
         with open(url, 'a') as file:
             file.write(data + "\n")
     except IOError:
         print(f"Error: Could not write to the file '{url}'.")
-
 
 def get_html_template(data):
     html_content = f"""<!DOCTYPE html>
