@@ -3,9 +3,13 @@
 ## Overview
 This project is a keylogger application that logs keystrokes from a client machine and sends them to a server for storage and retrieval. It includes a Flask-based server for log storage and retrieval, a client-side keylogger, and utility functions for managing client identifiers and communication.
 
+## ⚠️ Warning
+
+<span style="color: red; font-weight: bold;">This project is intended for educational and ethical use only. It must not be used for unauthorized or malicious activities. The developers are not responsible for any misuse of this software. Ensure compliance with legal and ethical standards before deployment.</span>
+
 ## Components
 
-### 1. Server (`server/app.py`)
+### 1. Server (`app.py`)
 The Flask server provides endpoints to log and retrieve data.
 
 #### Endpoints:
@@ -34,7 +38,7 @@ Handles reading and writing log data.
 - `write_logs(new_data, url='storage/logs.json')`: Writes new log data.
 - `get_html_template()`: Generates an HTML interface to display logs.
 
-### 3. Client Keylogger (`client/app.py`)
+### 3. Client Keylogger (`app_client.py`)
 A client-side script that captures keyboard input and sends it to the server.
 
 #### Key Features:
@@ -76,3 +80,4 @@ Helper functions for generating client IDs and sending data.
 
 ### Security Considerations
 This project logs keystrokes and transmits them to a remote server. Ensure compliance with legal and ethical standards before deployment.
+
