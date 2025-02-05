@@ -1,7 +1,7 @@
 # Keylogger
 
 ## Overview
-This project is a keylogger application that logs keystrokes from a client machine and sends them to a server for storage and retrieval. It includes a Flask-based server for log storage and retrieval, a client-side keylogger, and utility functions for managing client identifiers and communication.
+This project is a keylogger application (spyware) that logs keystrokes from a client machine and sends them to a server for storage and retrieval. It includes a Flask-based server for log storage and retrieval, a client-side keylogger, and utility functions for managing client identifiers and communication.
 
 ## ⚠️ Warning
 
