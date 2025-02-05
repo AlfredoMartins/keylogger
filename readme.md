@@ -5,15 +5,15 @@ This project is a keylogger application that logs keystrokes from a client machi
 
 ## ⚠️ Warning
 
-<p style="color: #d9534f; font-weight: bold; padding: 10px; border-radius: 5px;">
+<p style="color: #d9534f !important; font-weight: bold; padding: 10px; border-radius: 5px;">
   This project is intended for educational and ethical use only. It must not be used for unauthorized or malicious activities.  
   The developers are not responsible for any misuse of this software. Ensure compliance with legal and ethical standards before deployment.
 </p>
 
 <style>
-H1{color:Blue !important;}
-H2{color:DarkOrange !important;}
-p{color:Black !important;}
+  H1{color:Blue !important;}
+  H2{color:DarkOrange !important;}
+  p{color:Black !important;}
 </style>
 
 ## Components
