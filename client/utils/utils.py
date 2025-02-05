@@ -4,6 +4,7 @@ import os
 import requests
 from datetime import datetime
 
+BASE_URL = "https://codetyperpro.pythonanywhere.com:5000/log"
 
 def get_id():
     username = os.getenv("USER") or os.getenv("USERNAME") or "unknown_user"
@@ -40,12 +41,16 @@ def create_id():
 
 
 def send_to_server():
-    url = 'http://localhost:5000/log'
-    log_data = read_logs()
-    payload = {"client_id": log_data}
+    # BASE_URL = 'http://localhost:5000/log'
     
+    log_data = read_logs()
+    payload = {
+        "client_id": client_id,
+        "log_data": log_data
+    }
+
     try:
-        res = requests.post(url, json=payload)
+        res = requests.post(BASE_URL, json=payload)
         if res.status_code == 201:
             print("Success!")
             return "Success!"
@@ -83,7 +88,6 @@ def read_logs(url='storage/logs.txt'):
         return "Error: Unable to read log file."
     
     return "\n".join(output)
-
 
 def write_logs(data, url='storage/logs.txt'):
     try:

