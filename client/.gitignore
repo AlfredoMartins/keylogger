@@ -4,3 +4,4 @@ build
 dist
 app.spec
 output
+storage
