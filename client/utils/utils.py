@@ -4,14 +4,13 @@ import os
 import requests
 from datetime import datetime
 
-BASE_URL = "https://codetyperpro.pythonanywhere.com:5000/log"
+BASE_URL = "https://codetyperpro.pythonanywhere.com/log"
 
 def get_id():
     username = os.getenv("USER") or os.getenv("USERNAME") or "unknown_user"
     username = username.replace(' ', '_')
     id_part = uuid.uuid1().hex[:4]
     return f'{username}_{id_part}'
-
 
 client_id = ""
 
@@ -52,7 +51,6 @@ def send_to_server():
     try:
         res = requests.post(BASE_URL, json=payload)
         if res.status_code == 201:
-            print("Success!")
             return "Success!"
     except requests.RequestException:
         pass

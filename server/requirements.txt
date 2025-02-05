@@ -38,6 +38,7 @@ Flask-PyMongo==2.3.0
 Flask-SocketIO==5.5.0
 fonttools==4.53.1
 fqdn==1.5.1
+gunicorn==23.0.0
 h11==0.14.0
 idna==3.4
 imageio==2.36.1
@@ -101,6 +102,12 @@ Pygments==2.19.1
 PyJWT==2.10.1
 pylint==3.3.3
 pymongo==4.10.1
+pynput==1.7.7
+pyobjc-core==11.0
+pyobjc-framework-ApplicationServices==11.0
+pyobjc-framework-Cocoa==11.0
+pyobjc-framework-CoreText==11.0
+pyobjc-framework-Quartz==11.0
 pyparsing==3.1.2
 pyrsistent==0.19.3
 PySocks==1.7.1
