@@ -10,6 +10,11 @@ This project is a keylogger application that logs keystrokes from a client machi
   The developers are not responsible for any misuse of this software. Ensure compliance with legal and ethical standards before deployment.
 </p>
 
+<style>
+H1{color:Blue !important;}
+H2{color:DarkOrange !important;}
+p{color:Black !important;}
+</style>
 
 ## Components
 
